@@ -1,0 +1,8 @@
+const VARIANT = {
+  NAVBAR_MENU: "NAVBAR_MENU",
+  NAVBAR_MENU_ACTIVE: "NAVBAR_MENU_ACTIVE",
+};
+
+export default {
+  VARIANT,
+};
