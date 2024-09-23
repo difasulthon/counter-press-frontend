@@ -1,3 +1,3 @@
 # Counter Press
 
-[Counter Press Web App](https://counter-press.vercel.app/) online store for football shoes product
+[Counter Press Web App](https://counter-press.difasulthon.com/) online store for football shoes product
