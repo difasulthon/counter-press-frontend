@@ -16,22 +16,27 @@ const NavBar = (): React.ReactElement => {
   const [menuActive, setMenuActive] = useState("");
 
   return (
-    <div className="flex flex-row items-center justify-between h-20 pl-24 pr-24">
-      <LogoText onPress={() => {}} />
-      <div className="flex flex-row gap-12">
-        {menu.map((item) => (
-          <GeneralText
-            key={item}
-            text={item}
-            variant={
-              item === menuActive
-                ? VARIANT.NAVBAR_MENU_ACTIVE
-                : VARIANT.NAVBAR_MENU
-            }
-            onPress={() => setMenuActive(item)}
-          />
-        ))}
+    <div className="flex flex-row items-center justify-between h-20 px-10 pl-20 pr-20">
+      <div className="mr-20">
+        <LogoText onPress={() => {}} />
       </div>
+      <div className="flex flex-grow justify-center">
+        <div className="flex flex-row gap-12">
+          {menu.map((item) => (
+            <GeneralText
+              key={item}
+              text={item}
+              variant={
+                item === menuActive
+                  ? VARIANT.NAVBAR_MENU_ACTIVE
+                  : VARIANT.NAVBAR_MENU
+              }
+              onPress={() => setMenuActive(item)}
+            />
+          ))}
+        </div>
+      </div>
+
       <div className="flex flex-row items-center">
         <img
           src={Cart}
