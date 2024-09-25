@@ -28,7 +28,6 @@ const Input = (props: Props): React.JSX.Element => {
   } = props;
 
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
-  console.log("rightIcon", rightIcon);
 
   const onFocusHandler = () => {
     setIsFocused(true);

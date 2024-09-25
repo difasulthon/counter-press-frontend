@@ -7,6 +7,7 @@ type Props = {
   text: string;
   variant?: string;
   onPress?: () => void;
+  italic?: boolean;
 };
 
 const { VARIANT } = GeneralTextConstants;
@@ -28,6 +29,15 @@ const getFontStyle = (variant?: string) => {
     case VARIANT.FOOTER: {
       return "font-normal text-sm text-white";
     }
+    case VARIANT.CATEGORY_HEADER: {
+      return "font-semibold text-2xl text-primary";
+    }
+    case VARIANT.PRODUCT_TITLE: {
+      return "font-semibold text-base text-black";
+    }
+    case VARIANT.PRODUCT_PRICE: {
+      return "font-normal text-sm text-black";
+    }
     default: {
       return "font-normal text-base text-black";
     }
@@ -35,13 +45,14 @@ const getFontStyle = (variant?: string) => {
 };
 
 const GeneralText = (props: Props): React.ReactElement => {
-  const { text, variant, onPress } = props;
-  console.log("onPress", onPress);
+  const { text, variant, onPress, italic } = props;
 
   return (
     <p
       onClick={onPress}
-      className={`${getFontStyle(variant)} ${getHoverStyle(!!onPress)}`}
+      className={`${getFontStyle(variant)} ${getHoverStyle(!!onPress)} ${
+        italic ? "italic" : undefined
+      }`}
     >
       {text}
     </p>
