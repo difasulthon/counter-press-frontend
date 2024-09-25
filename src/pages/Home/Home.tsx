@@ -1,42 +1,27 @@
 import React, { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 import Search from "../../assets/icons/search.svg";
 import InputSearch from "../../components/InputSearch";
 import CategoryHeader from "../../components/CategoryHeader";
-
-import Jumbotron from "./components/Jumbotron";
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import ProductItem from "../../components/ProductItem";
 import type { Product } from "../../types/Product.type";
 
-export const homeLoader = async (): Promise<LoaderFunctionArgs<never>> => {
+import Jumbotron from "./components/Jumbotron";
+
+export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
   try {
-    // console.log("loader");
-    // const res = await fetch(
-    //   "https://www.counter-press-backend.difasulthon.com/api/products",
-    //   {
-    //     method: "GET",
-    //     // mode: "no-cors",
-    //     // headers: {
-    //     //   "Access-Control-Allow-Origin": "*",
-    //     // },
-    //   }
-    // );
-    // const data = await res.json();
+    console.log("loader");
+    const res = await fetch(
+      "https://www.counter-press-backend.difasulthon.com/api/products",
+      {
+        method: "GET",
+      }
+    );
+    const data = await res.json();
 
     return {
-      products: [
-        {
-          id: "cm1devqum0000zcurzrdigins",
-          slug: "SPECS-ACCELERATOR-ALPHAFORM-CORE-FG-SILVER-SAFETY-YELLOW-KINGFISHER",
-          name: "SPECS ACCELERATOR ALPHAFORM",
-          price: 369000,
-          image: "https://topsystem.id/api/product//300/1725618439.jpg",
-          stock: 10,
-          brandId: crypto.randomUUID(),
-          brandName: "Specs",
-        },
-      ],
+      products: data.data,
     };
   } catch (e) {
     console.error("Error fetching data:", e);
@@ -69,7 +54,7 @@ const Home = (): React.ReactElement => {
       </div>
       <div className="flex flex-col mt-20 pl-32 pr-32">
         <CategoryHeader titleItalic="New" titleNormal="Arrival" />
-        <div className="mt-10 mb-10">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] mt-10 mb-10">
           {products.length > 0 &&
             products.map((product: Product) => (
               <ProductItem key={product.id} item={product} />

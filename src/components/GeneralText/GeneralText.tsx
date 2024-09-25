@@ -21,10 +21,10 @@ const getFontStyle = (variant?: string) => {
       return "font-bold text-base text-primary";
     }
     case VARIANT.JUMBOTRON: {
-      return "font-normal text-5xl text-primary text-orange";
+      return "font-normal text-5xl text-primary text-orangePrimary";
     }
     case VARIANT.JUMBOTRON_BOLD: {
-      return "font-bold text-5xl text-primary text-orange";
+      return "font-bold text-5xl text-primary text-orangePrimary";
     }
     case VARIANT.FOOTER: {
       return "font-normal text-sm text-white";
@@ -46,6 +46,7 @@ const getFontStyle = (variant?: string) => {
 
 const GeneralText = (props: Props): React.ReactElement => {
   const { text, variant, onPress, italic } = props;
+  console.log("getFontStyle(variant)", getFontStyle(variant));
 
   return (
     <p
