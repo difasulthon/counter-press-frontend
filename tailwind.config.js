@@ -10,7 +10,8 @@ export default {
         primary: '#1F3E97',
         secondary: '#18378F',
         grayPrimary: '#858585',
-        graySecondary: '#F4F4F4'
+        graySecondary: '#F4F4F4',
+        orange: '#FFB800'
       },
       fontFamily: {
         logoText: ["Pacifico"]

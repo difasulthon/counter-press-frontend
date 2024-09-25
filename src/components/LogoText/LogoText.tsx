@@ -3,15 +3,16 @@ import { getHoverStyle } from "../../utils/Style.util";
 
 type Props = {
   onPress?: () => void;
+  fontSize?: string;
 };
 
 const LogoText = (props: Props): React.ReactElement => {
-  const { onPress } = props;
+  const { onPress, fontSize = "text-2xl" } = props;
 
   return (
     <p
       onClick={onPress}
-      className={`font-normal text-primary font-logoText text-2xl ${getHoverStyle(
+      className={`font-normal text-primary font-logoText ${fontSize} ${getHoverStyle(
         !!onPress
       )}`}
     >

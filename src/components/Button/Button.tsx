@@ -26,7 +26,7 @@ const Button = (props: Props): React.ReactElement => {
   return (
     <div
       onClick={onPress}
-      className={`flex flex-col items-center justify-center bg-primary rounded-full h-9 w-20 ${getHoverStyle(
+      className={`flex flex-col items-center justify-center bg-primary rounded-full h-9 pl-4 pr-4 ${getHoverStyle(
         true
       )}`}
     >
