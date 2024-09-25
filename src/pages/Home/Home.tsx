@@ -22,7 +22,7 @@ const Home = (): React.ReactElement => {
           rightIcon={<img src={Search} alt="Search" className="w-4 h-4" />}
         />
       </div>
-      <div className="flex flex-grow w-full mt-10">
+      <div className="flex w-full mt-10">
         <Jumbotron />
       </div>
     </div>

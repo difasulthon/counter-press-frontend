@@ -1,13 +1,18 @@
 import { Outlet } from "react-router-dom";
 
-import "./Root.css";
 import NavBar from "../../components/NavBar/NavBar";
+import Footer from "../../components/Footer";
+
+import "./Root.css";
 
 function Root() {
   return (
-    <div className="pb-8">
+    <div className="min-h-screen flex flex-col">
       <NavBar />
-      <Outlet />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
   );
 }

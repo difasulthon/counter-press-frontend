@@ -25,6 +25,9 @@ const getFontStyle = (variant?: string) => {
     case VARIANT.JUMBOTRON_BOLD: {
       return "font-bold text-5xl text-primary text-orange";
     }
+    case VARIANT.FOOTER: {
+      return "font-normal text-sm text-white";
+    }
     default: {
       return "font-normal text-base text-black";
     }
