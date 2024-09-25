@@ -11,17 +11,33 @@ import type { Product } from "../../types/Product.type";
 
 export const homeLoader = async (): Promise<LoaderFunctionArgs<never>> => {
   try {
-    console.log("loader");
-    const res = await fetch("http://localhost:80/api/products", {
-      method: "GET",
-      // mode: "no-cors",
-      // headers: {
-      //   "Access-Control-Allow-Origin": "*",
-      // },
-    });
-    const data = await res.json();
+    // console.log("loader");
+    // const res = await fetch(
+    //   "https://www.counter-press-backend.difasulthon.com/api/products",
+    //   {
+    //     method: "GET",
+    //     // mode: "no-cors",
+    //     // headers: {
+    //     //   "Access-Control-Allow-Origin": "*",
+    //     // },
+    //   }
+    // );
+    // const data = await res.json();
 
-    return { products: data.data };
+    return {
+      products: [
+        {
+          id: "cm1devqum0000zcurzrdigins",
+          slug: "SPECS-ACCELERATOR-ALPHAFORM-CORE-FG-SILVER-SAFETY-YELLOW-KINGFISHER",
+          name: "SPECS ACCELERATOR ALPHAFORM",
+          price: 369000,
+          image: "https://topsystem.id/api/product//300/1725618439.jpg",
+          stock: 10,
+          brandId: crypto.randomUUID(),
+          brandName: "Specs",
+        },
+      ],
+    };
   } catch (e) {
     console.error("Error fetching data:", e);
     return { products: null };
