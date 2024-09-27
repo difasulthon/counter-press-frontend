@@ -5,6 +5,7 @@ import Search from "../../assets/icons/search.svg";
 import InputSearch from "../../components/InputSearch";
 import CategoryHeader from "../../components/CategoryHeader";
 import ProductItem from "../../components/ProductItem";
+import { BASE_URL } from "../../configuration/env";
 import type { Product } from "../../types/Product.type";
 
 import Jumbotron from "./components/Jumbotron";
@@ -13,7 +14,7 @@ export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
   try {
     console.log("loader");
     const res = await fetch(
-      "https://www.counter-press-backend.difasulthon.com/api/products",
+      `${BASE_URL}/products?sort=desc&sortBy=createdAt&page=1&size=4`,
       {
         method: "GET",
       }
@@ -21,7 +22,7 @@ export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
     const data = await res.json();
 
     return {
-      products: data.data,
+      products: data.data.products,
     };
   } catch (e) {
     console.error("Error fetching data:", e);
@@ -57,7 +58,24 @@ const Home = (): React.ReactElement => {
         <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] mt-10 mb-10">
           {products.length > 0 &&
             products.map((product: Product) => (
-              <ProductItem key={product.id} item={product} />
+              <ProductItem
+                key={product.id}
+                item={product}
+                onPress={(item) => console.log("item", item)}
+              />
+            ))}
+        </div>
+      </div>
+      <div className="flex flex-col pl-32 pr-32">
+        <CategoryHeader titleItalic="Best" titleNormal="Seller" />
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] mt-10 mb-10">
+          {products.length > 0 &&
+            products.map((product: Product) => (
+              <ProductItem
+                key={product.id}
+                item={product}
+                onPress={(item) => console.log("item", item)}
+              />
             ))}
         </div>
       </div>
