@@ -5,6 +5,7 @@ import type { Product } from "../../types/Product.type";
 
 import GeneralText from "../GeneralText";
 import Button from "../Button";
+import { getCurrency } from "../../utils/Formatter.util";
 
 type Props = {
   item: Product;
@@ -32,10 +33,7 @@ const ProductItem = (props: Props): React.ReactElement => {
       </div>
       <div className="flex flex-row justify-between items-center mt-2">
         <GeneralText
-          text={Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-          }).format(item.price)}
+          text={getCurrency(item.price)}
           variant={VARIANT.PRODUCT_PRICE}
         />
         {isHovered && (

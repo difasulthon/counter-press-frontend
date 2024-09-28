@@ -38,6 +38,21 @@ const getFontStyle = (variant?: string) => {
     case VARIANT.PRODUCT_PRICE: {
       return "font-normal text-sm text-black";
     }
+    case VARIANT.BREADCRUMB: {
+      return "font-semibold text-sm text-grayPrimary";
+    }
+    case VARIANT.BREADCRUMB_ACTIVE: {
+      return "font-semibold text-sm text-primary";
+    }
+    case VARIANT.PRODUCT_TITLE_BIG: {
+      return "font-semibold text-5xl text-black";
+    }
+    case VARIANT.PRICE: {
+      return "font-normal text-4xl text-primary";
+    }
+    case VARIANT.SIZE: {
+      return "font-normal text-base text-grayPrimary";
+    }
     default: {
       return "font-normal text-base text-black";
     }

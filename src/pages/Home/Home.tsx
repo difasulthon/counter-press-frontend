@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 import Search from "../../assets/icons/search.svg";
 import InputSearch from "../../components/InputSearch";
@@ -32,6 +32,8 @@ export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
 
 const Home = (): React.ReactElement => {
   const { products } = useLoaderData() as { products: Product[] };
+  const navigate = useNavigate();
+
   const [keyWord, setKeyWord] = useState("");
 
   const handleSearchChange = (value: string) => {
@@ -61,7 +63,7 @@ const Home = (): React.ReactElement => {
               <ProductItem
                 key={product.id}
                 item={product}
-                onPress={(item) => console.log("item", item)}
+                onPress={(item) => navigate(`/product/${item.slug}`)}
               />
             ))}
         </div>
@@ -74,7 +76,7 @@ const Home = (): React.ReactElement => {
               <ProductItem
                 key={product.id}
                 item={product}
-                onPress={(item) => console.log("item", item)}
+                onPress={(item) => navigate(`/product/${item.slug}`)}
               />
             ))}
         </div>
