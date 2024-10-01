@@ -31,7 +31,11 @@ const ProductItem = (props: Props): React.ReactElement => {
       <div className="mt-2">
         <GeneralText text={item.name} variant={VARIANT.PRODUCT_TITLE} />
       </div>
-      <div className="flex flex-row justify-between items-center mt-2">
+      <div
+        className={`flex flex-row justify-between items-center ${
+          isHovered ? "mt-2" : "mt-4"
+        }`}
+      >
         <GeneralText
           text={getCurrency(item.price)}
           variant={VARIANT.PRODUCT_PRICE}

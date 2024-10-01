@@ -12,7 +12,6 @@ import Jumbotron from "./components/Jumbotron";
 
 export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
   try {
-    console.log("loader");
     const res = await fetch(
       `${BASE_URL}/products?sort=desc&sortBy=createdAt&page=1&size=4`,
       {

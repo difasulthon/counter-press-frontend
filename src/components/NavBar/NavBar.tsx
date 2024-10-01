@@ -3,16 +3,21 @@ import React, { useState } from "react";
 import { GeneralTextConstants } from "../../constants";
 import Cart from "../../assets/icons/cart.svg";
 import { getHoverStyle } from "../../utils/Style.util";
+import type { Brand } from "../../types/Brand.type";
 
 import LogoText from "../LogoText";
 import GeneralText from "../GeneralText";
 import Button from "../Button";
 
-import { menu } from "./NavBar.config";
-
 const { VARIANT } = GeneralTextConstants;
 
-const NavBar = (): React.ReactElement => {
+type Props = {
+  items: Brand[];
+};
+
+const NavBar = (props: Props): React.ReactElement => {
+  const { items } = props;
+
   const [menuActive, setMenuActive] = useState("");
 
   return (
@@ -22,16 +27,25 @@ const NavBar = (): React.ReactElement => {
       </div>
       <div className="flex flex-grow justify-center">
         <div className="flex flex-row gap-12">
-          {menu.map((item) => (
+          <GeneralText
+            text={"Home"}
+            variant={
+              menuActive === "home"
+                ? VARIANT.NAVBAR_MENU_ACTIVE
+                : VARIANT.NAVBAR_MENU
+            }
+            onPress={() => setMenuActive("home")}
+          />
+          {items.map((item: Brand) => (
             <GeneralText
-              key={item}
-              text={item}
+              key={item.id}
+              text={item.name}
               variant={
-                item === menuActive
+                item.slug === menuActive
                   ? VARIANT.NAVBAR_MENU_ACTIVE
                   : VARIANT.NAVBAR_MENU
               }
-              onPress={() => setMenuActive(item)}
+              onPress={() => setMenuActive(item.slug)}
             />
           ))}
         </div>
