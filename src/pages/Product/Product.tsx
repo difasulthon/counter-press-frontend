@@ -50,7 +50,7 @@ const Product = (): React.ReactElement => {
         <img
           src={image}
           alt={slug}
-          className="border-2 border-graySecondary rounded-md h-2/6 w-2/6"
+          className="border-2 border-graySecondary rounded-md h-2/5 w-2/5"
         />
         <div className="flex flex-col justify-between">
           <div>

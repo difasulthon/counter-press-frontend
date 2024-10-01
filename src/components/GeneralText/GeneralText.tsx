@@ -53,6 +53,9 @@ const getFontStyle = (variant?: string) => {
     case VARIANT.SIZE: {
       return "font-normal text-base text-grayPrimary";
     }
+    case VARIANT.PAGE_TITLE: {
+      return "font-normal text-3xl text-black";
+    }
     default: {
       return "font-normal text-base text-black";
     }

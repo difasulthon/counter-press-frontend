@@ -13,17 +13,50 @@ const { VARIANT } = GeneralTextConstants;
 
 type Props = {
   items: Brand[];
+  onPressMenu: (param: string) => void;
+  onPressCart: () => void;
+  onPressSignIn: () => void;
+  onPressSignUp: () => void;
+  onPressLogo: () => void;
 };
 
 const NavBar = (props: Props): React.ReactElement => {
-  const { items } = props;
+  const {
+    items,
+    onPressMenu,
+    onPressCart,
+    onPressSignIn,
+    onPressSignUp,
+    onPressLogo,
+  } = props;
 
   const [menuActive, setMenuActive] = useState("");
+
+  const handleOnPressMenu = (brand: string) => {
+    setMenuActive(brand);
+    onPressMenu(brand);
+  };
+
+  const handleOnPressCart = () => {
+    onPressCart();
+  };
+
+  const handleOnPressSignIn = () => {
+    onPressSignIn();
+  };
+
+  const handleOnPressSignUp = () => {
+    onPressSignUp();
+  };
+
+  const handleOnPressLogo = () => {
+    onPressLogo();
+  };
 
   return (
     <div className="flex flex-row items-center justify-between h-20 px-10 pl-20 pr-20">
       <div className="mr-20">
-        <LogoText onPress={() => {}} />
+        <LogoText onPress={() => handleOnPressLogo()} />
       </div>
       <div className="flex flex-grow justify-center">
         <div className="flex flex-row gap-12">
@@ -34,7 +67,7 @@ const NavBar = (props: Props): React.ReactElement => {
                 ? VARIANT.NAVBAR_MENU_ACTIVE
                 : VARIANT.NAVBAR_MENU
             }
-            onPress={() => setMenuActive("home")}
+            onPress={() => handleOnPressMenu("home")}
           />
           {items.map((item: Brand) => (
             <GeneralText
@@ -45,7 +78,7 @@ const NavBar = (props: Props): React.ReactElement => {
                   ? VARIANT.NAVBAR_MENU_ACTIVE
                   : VARIANT.NAVBAR_MENU
               }
-              onPress={() => setMenuActive(item.slug)}
+              onPress={() => handleOnPressMenu(item.slug)}
             />
           ))}
         </div>
@@ -56,11 +89,11 @@ const NavBar = (props: Props): React.ReactElement => {
           src={Cart}
           alt="Cart"
           className={`w-5 h-5 mr-10 ${getHoverStyle(true)}`}
-          onClick={() => {}}
+          onClick={() => handleOnPressCart()}
         />
         <div className="flex flex-row gap-3">
-          <Button text="Sign Up" onPress={() => {}} />
-          <Button text="Sign In" border onPress={() => {}} />
+          <Button text="Sign Up" onPress={() => handleOnPressSignUp()} />
+          <Button text="Sign In" border onPress={() => handleOnPressSignIn()} />
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ const VARIANT = {
   BREADCRUMB_ACTIVE: "BREADCRUMB_ACTIVE",
   PRICE: "PRICE",
   SIZE: "SIZE",
+  PAGE_TITLE: "PAGE_TITLE",
 };
 
 export default {

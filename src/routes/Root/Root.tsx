@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
 
 import { BASE_URL } from "../../configuration/env";
 import NavBar from "../../components/NavBar/NavBar";
@@ -25,10 +25,38 @@ export const rootLoader = async (): Promise<{ brands: Brand[] }> => {
 
 function Root() {
   const { brands } = useLoaderData() as { brands: Brand[] };
+  const navigate = useNavigate();
+
+  const handleOnPressMenu = (brand: string) => {
+    if (brand === "home") {
+      navigate("/");
+    } else {
+      navigate(`/products/${brand}`);
+    }
+  };
+
+  const handleNavigateCart = () => {
+    navigate("/cart");
+  };
+
+  const handleNavigateSignIn = () => {
+    navigate("/sign-in");
+  };
+
+  const handleNavigateSignUp = () => {
+    navigate("/sign-up");
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
-      <NavBar items={brands} />
+      <NavBar
+        items={brands}
+        onPressMenu={(brand) => handleOnPressMenu(brand)}
+        onPressCart={() => handleNavigateCart()}
+        onPressSignIn={() => handleNavigateSignIn()}
+        onPressSignUp={() => handleNavigateSignUp()}
+        onPressLogo={() => handleOnPressMenu("home")}
+      />
       <div className="flex-grow">
         <Outlet />
       </div>
