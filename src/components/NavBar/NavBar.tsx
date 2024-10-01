@@ -39,18 +39,22 @@ const NavBar = (props: Props): React.ReactElement => {
 
   const handleOnPressCart = () => {
     onPressCart();
+    setMenuActive("");
   };
 
   const handleOnPressSignIn = () => {
     onPressSignIn();
+    setMenuActive("");
   };
 
   const handleOnPressSignUp = () => {
     onPressSignUp();
+    setMenuActive("");
   };
 
   const handleOnPressLogo = () => {
     onPressLogo();
+    setMenuActive("");
   };
 
   return (
