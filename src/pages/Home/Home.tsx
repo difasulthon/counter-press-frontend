@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
-import Search from "../../assets/icons/search.svg";
 import InputSearch from "../../components/InputSearch";
 import CategoryHeader from "../../components/CategoryHeader";
 import ProductItem from "../../components/ProductItem";
@@ -23,8 +22,7 @@ export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
     return {
       products: data.data.products,
     };
-  } catch (e) {
-    console.error("Error fetching data:", e);
+  } catch {
     return { products: null };
   }
 };
@@ -33,23 +31,10 @@ const Home = (): React.ReactElement => {
   const { products } = useLoaderData() as { products: Product[] };
   const navigate = useNavigate();
 
-  const [keyWord, setKeyWord] = useState("");
-
-  const handleSearchChange = (value: string) => {
-    setKeyWord(value);
-  };
-
   return (
     <div className="flex flex-col">
       <div className="flex flex-grow justify-center mt-6">
-        <InputSearch
-          onChange={(e) => handleSearchChange(e.target.value)}
-          value={keyWord}
-          type="text"
-          placeholder="Search..."
-          isFullRounded
-          rightIcon={<img src={Search} alt="Search" className="w-4 h-4" />}
-        />
+        <InputSearch type="text" placeholder="Search..." menu="home" />
       </div>
       <div className="flex w-full mt-10">
         <Jumbotron />

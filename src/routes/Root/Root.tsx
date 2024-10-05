@@ -17,8 +17,7 @@ export const rootLoader = async (): Promise<{ brands: Brand[] }> => {
     return {
       brands,
     };
-  } catch (e) {
-    console.error("Error fetching data:", e);
+  } catch {
     return { brands: [] };
   }
 };

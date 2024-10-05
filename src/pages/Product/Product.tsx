@@ -11,6 +11,7 @@ import type { Product } from "../../types/Product.type";
 
 import config from "./Product.config";
 import Button from "../../components/Button";
+import CategoryHeader from "../../components/CategoryHeader";
 
 const { VARIANT } = GeneralTextConstants;
 
@@ -46,13 +47,13 @@ const Product = (): React.ReactElement => {
           variant={VARIANT.BREADCRUMB_ACTIVE}
         />
       </div>
-      <div className="flex flex-row gap-8 mt-10">
+      <div className="flex flex-row gap-6 mt-10">
         <img
           src={image}
           alt={slug}
           className="border-2 border-graySecondary rounded-md h-2/5 w-2/5"
         />
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between pt-6 pb-6 w-2/6">
           <div>
             <div className="mb-10">
               <GeneralText text={name} variant={VARIANT.PRODUCT_TITLE_BIG} />
@@ -70,6 +71,12 @@ const Product = (): React.ReactElement => {
           <div className="flex flex-row gap-3">
             <Button text="Add to Cart" border onPress={() => {}} />
             <Button text="Buy Now" onPress={() => {}} />
+          </div>
+        </div>
+        <div className="w-2/6 pt-6 pb-6">
+          <CategoryHeader titleItalic="" titleNormal="Detail" />
+          <div className="mt-6 pl-4 max-h-96 overflow-auto">
+            <GeneralText text={config.textDescription} />
           </div>
         </div>
       </div>

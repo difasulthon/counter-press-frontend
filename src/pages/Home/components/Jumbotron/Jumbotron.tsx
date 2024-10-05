@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import BackgroundJumbotron from "../../../../assets/images/bg-jumbotron.png";
 import NikeTiempoLegend from "../../../../assets/images/nike-tiempo-legend-10.png";
@@ -12,6 +13,8 @@ const {
 } = GeneralTextConstants;
 
 const Jumbotron = (): React.ReactElement => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative w-full">
       <img src={BackgroundJumbotron} alt="bg-new-arrival" className="w-full" />
@@ -24,7 +27,10 @@ const Jumbotron = (): React.ReactElement => {
           </div>
           <img src={NikeTiempoLegend} alt="bg-new-arrival" className="mt-4" />
           <div className="mt-6">
-            <Button text="Shop Now" onPress={() => {}} />
+            <Button
+              text="Shop Now"
+              onPress={() => navigate("/product/nike-tiempo-legend-10")}
+            />
           </div>
         </div>
       </div>

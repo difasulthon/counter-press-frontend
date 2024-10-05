@@ -68,9 +68,9 @@ const GeneralText = (props: Props): React.ReactElement => {
   return (
     <p
       onClick={onPress}
-      className={`${getFontStyle(variant)} ${getHoverStyle(!!onPress)} ${
-        italic ? "italic" : undefined
-      }`}
+      className={`whitespace-pre-line ${getFontStyle(variant)} ${getHoverStyle(
+        !!onPress
+      )} ${italic ? "italic" : undefined}`}
     >
       {text}
     </p>

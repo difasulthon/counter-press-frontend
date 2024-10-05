@@ -1,31 +1,33 @@
-import React, { ChangeEvent, HTMLInputTypeAttribute } from "react";
+import React, { HTMLInputTypeAttribute } from "react";
+import { Form, useSearchParams } from "react-router-dom";
+
+import Search from "../../assets/icons/search.svg";
 
 import Input from "../Input/Input";
 
 type Props = {
-  onChange: (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  value: string;
   type: HTMLInputTypeAttribute;
   placeholder: string;
-  isFullRounded?: boolean;
-  rightIcon?: React.ReactNode;
+  menu?: string;
 };
 
 const InputSearch = (props: Props): React.ReactElement => {
-  const { onChange, value, type, placeholder, isFullRounded, rightIcon } =
-    props;
+  const { type, placeholder, menu = "" } = props;
+
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q");
 
   return (
-    <Input
-      onChange={onChange}
-      value={value}
-      type={type}
-      placeholder={placeholder}
-      isFullRounded={isFullRounded}
-      rightIcon={rightIcon}
-    />
+    <Form id="search-products" method="get" action={`/products/${menu}`}>
+      <Input
+        type={type}
+        placeholder={placeholder}
+        isFullRounded
+        rightIcon={<img src={Search} alt="Search" className="w-4 h-4" />}
+        name="q"
+        defaultValue={query ?? undefined}
+      />
+    </Form>
   );
 };
 

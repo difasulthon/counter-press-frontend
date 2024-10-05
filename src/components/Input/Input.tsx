@@ -2,16 +2,18 @@ import React, { ChangeEvent, HTMLInputTypeAttribute } from "react";
 
 export type Props = {
   type: HTMLInputTypeAttribute;
-  onChange: (
+  onChange?: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  value: string;
+  value?: string;
   placeholder: string;
   isArea?: boolean;
   required?: boolean;
   rightIcon?: React.ReactNode;
   onClickRightIcon?: () => void;
   isFullRounded?: boolean;
+  name?: string;
+  defaultValue?: string;
 };
 
 const Input = (props: Props): React.JSX.Element => {
@@ -25,6 +27,8 @@ const Input = (props: Props): React.JSX.Element => {
     rightIcon,
     onClickRightIcon,
     isFullRounded,
+    name,
+    defaultValue,
   } = props;
 
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
@@ -57,7 +61,7 @@ const Input = (props: Props): React.JSX.Element => {
     <div className="relative">
       <input
         type={type}
-        value={value}
+        // value={value || ""}
         onChange={onChange}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
@@ -65,6 +69,8 @@ const Input = (props: Props): React.JSX.Element => {
         ${isFullRounded ? "rounded-full" : "rounded-lg"}
       `}
         placeholder={placeholder}
+        name={name}
+        defaultValue={defaultValue}
       />
       <div className="absolute right-6 top-2" onClick={onClickRightIcon}>
         {rightIcon}

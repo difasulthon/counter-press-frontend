@@ -21,11 +21,12 @@ const ProductItem = (props: Props): React.ReactElement => {
 
   return (
     <div
-      className={`flex flex-col pl-3 pr-3 pt-3 pb-3 mb-6 rounded-md border-2 border-graySecondary w-64 ${
+      className={`flex flex-col pl-3 pr-3 pt-3 pb-3 mb-6 rounded-md border-2 border-graySecondary w-64 hover:cursor-pointer ${
         isHovered ? "bg-graySecondary" : "bg-white"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onPress(item)}
     >
       <img src={item.image} alt={item.slug} className="h-60 w-64" />
       <div className="mt-2">
