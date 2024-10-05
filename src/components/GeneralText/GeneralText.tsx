@@ -5,7 +5,7 @@ import { getHoverStyle } from "../../utils/Style.util";
 
 type Props = {
   text: string;
-  variant?: string;
+  variant?: (typeof GeneralTextConstants.VARIANT)[keyof typeof GeneralTextConstants.VARIANT];
   onPress?: () => void;
   italic?: boolean;
 };
@@ -56,6 +56,12 @@ const getFontStyle = (variant?: string) => {
     case VARIANT.PAGE_TITLE: {
       return "font-normal text-3xl text-black";
     }
+    case VARIANT.INPUT_LABEL: {
+      return "font-semibold text-sm text-primary";
+    }
+    case VARIANT.INPUT_LABEL_ERROR: {
+      return "font-semibold text-sm text-red-500";
+    }
     default: {
       return "font-normal text-base text-black";
     }
@@ -70,7 +76,7 @@ const GeneralText = (props: Props): React.ReactElement => {
       onClick={onPress}
       className={`whitespace-pre-line ${getFontStyle(variant)} ${getHoverStyle(
         !!onPress
-      )} ${italic ? "italic" : undefined}`}
+      )} ${italic ? "italic" : undefined} text-red`}
     >
       {text}
     </p>

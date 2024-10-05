@@ -87,7 +87,6 @@ const NavBar = (props: Props): React.ReactElement => {
           ))}
         </div>
       </div>
-
       <div className="flex flex-row items-center">
         <img
           src={Cart}

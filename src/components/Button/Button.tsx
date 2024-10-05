@@ -1,12 +1,15 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 
 import { getHoverStyle } from "../../utils/Style.util";
 
-type Props = {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+
+type Props = ButtonProps & {
   text: string;
   border?: boolean;
-  onPress: () => void;
+  onPress?: () => void;
   size?: string;
+  fullWidth?: boolean;
 };
 
 const getTextSize = (size: string) => {
@@ -44,33 +47,36 @@ const getHeightSize = (size: string) => {
 };
 
 const Button = (props: Props): React.ReactElement => {
-  const { text, border = false, onPress, size = "" } = props;
+  const { text, border = false, onPress, size = "", fullWidth } = props;
 
   const textSize = getTextSize(size);
   const heightSize = getHeightSize(size);
+  const widthClass = fullWidth ? "w-full" : undefined;
 
   if (border) {
     return (
-      <div
+      <button
         onClick={onPress}
-        className={`flex flex-col items-center justify-center bg-white rounded-full pl-4 pr-4 border-2 border-primary ${heightSize} ${getHoverStyle(
+        className={`items-center justify-center bg-white rounded-full pl-4 pr-4 border-2 border-primary ${heightSize} ${getHoverStyle(
           true
-        )}`}
+        )} ${widthClass}`}
+        type={props.type}
       >
-        <p className={`font-bold text-primary ${textSize}`}>{text}</p>
-      </div>
+        <p className={`font-semibold text-primary ${textSize}`}>{text}</p>
+      </button>
     );
   }
 
   return (
-    <div
+    <button
       onClick={onPress}
-      className={`flex flex-col items-center justify-center bg-primary rounded-full pl-4 pr-4 ${heightSize} ${getHoverStyle(
+      className={`items-center justify-center bg-primary rounded-full pl-4 pr-4 ${heightSize} ${getHoverStyle(
         true
-      )}`}
+      )} ${widthClass}`}
+      type={props.type}
     >
-      <p className={`font-bold text-white ${textSize}`}>{text}</p>
-    </div>
+      <p className={`font-semibold text-white ${textSize}`}>{text}</p>
+    </button>
   );
 };
 

@@ -13,6 +13,8 @@ const VARIANT = {
   PRICE: "PRICE",
   SIZE: "SIZE",
   PAGE_TITLE: "PAGE_TITLE",
+  INPUT_LABEL: "INPUT_LABEL",
+  INPUT_LABEL_ERROR: "INPUT_LABEL_ERROR",
 };
 
 export default {
