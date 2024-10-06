@@ -9,6 +9,7 @@ import SignUp, { signUpAction } from "../pages/SignUp/SignUp";
 import { homeLoader } from "../pages/Home/Home";
 import { productLoader } from "../pages/Product/Product";
 import { productsLoader } from "../pages/Products/Products";
+import { signInAction } from "../pages/SignIn/SignIn";
 
 import Root from "./Root";
 import { rootLoader } from "./Root/Root";
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
       {
         element: <SignIn />,
         path: "/sign-in",
+        action: signInAction,
       },
       {
         element: <SignUp />,
