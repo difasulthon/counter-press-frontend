@@ -5,11 +5,13 @@ import Product from "../pages/Product";
 import Products from "../pages/Products";
 import Cart from "../pages/Cart";
 import SignIn from "../pages/SignIn";
-import SignUp, { signUpAction } from "../pages/SignUp/SignUp";
+import SignUp from "../pages/SignUp/SignUp";
+import Profile from "../pages/Profile";
 import { homeLoader } from "../pages/Home/Home";
 import { productLoader } from "../pages/Product/Product";
 import { productsLoader } from "../pages/Products/Products";
 import { signInAction } from "../pages/SignIn/SignIn";
+import { signUpAction } from "../pages/SignUp/SignUp";
 
 import Root from "./Root";
 import { rootLoader } from "./Root/Root";
@@ -48,6 +50,10 @@ const router = createBrowserRouter([
         element: <SignUp />,
         path: "/sign-up",
         action: signUpAction,
+      },
+      {
+        element: <Profile />,
+        path: "/profile",
       },
     ],
   },

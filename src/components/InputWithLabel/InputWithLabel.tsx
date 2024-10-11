@@ -11,12 +11,14 @@ type Props = {
   required?: boolean;
   name: string;
   type?: HTMLInputTypeAttribute;
+  disabled?: boolean;
+  value?: string;
 };
 
 const { VARIANT } = GeneralTextConstants;
 
 const InputWithLabel = (props: Props): React.ReactElement => {
-  const { label, placeholder, required, name, type } = props;
+  const { label, placeholder, required, name, type, disabled, value } = props;
 
   return (
     <div className="">
@@ -31,6 +33,8 @@ const InputWithLabel = (props: Props): React.ReactElement => {
         type={type || "text"}
         required={required}
         name={name}
+        disabled={disabled}
+        value={value}
       />
     </div>
   );

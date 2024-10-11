@@ -14,6 +14,7 @@ export type Props = {
   isFullRounded?: boolean;
   name?: string;
   defaultValue?: string;
+  disabled?: boolean;
 };
 
 const Input = (props: Props): React.JSX.Element => {
@@ -29,6 +30,7 @@ const Input = (props: Props): React.JSX.Element => {
     isFullRounded,
     name,
     defaultValue,
+    disabled = false,
   } = props;
 
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
@@ -71,6 +73,7 @@ const Input = (props: Props): React.JSX.Element => {
         placeholder={placeholder}
         name={name}
         defaultValue={defaultValue}
+        disabled={disabled}
       />
       <div className="absolute right-6 top-2" onClick={onClickRightIcon}>
         {rightIcon}

@@ -1,27 +1,33 @@
 import React, { useEffect } from "react";
-import { ActionFunctionArgs, Form, useActionData } from "react-router-dom";
+import {
+  ActionFunctionArgs,
+  Form,
+  redirect,
+  useActionData,
+} from "react-router-dom";
 import { toast } from "react-toastify";
 import { ValidationError } from "yup";
 
 import PageTitle from "../../components/PageTitle";
 import signInSchema from "../../schemas/SignIn.schema";
+import { signIn } from "../../services/Auth.services";
+
 import SignInForm from "./components/SignInForm";
+import { signInImage } from "./SignIn.config";
+import { getSignInFormValues } from "./SignIn.handler";
 
 export const signInAction = async ({ request }: ActionFunctionArgs) => {
   try {
     const formData = await request.formData();
-
-    const formValues = {
-      userName: formData.get("userName"),
-      password: formData.get("password"),
-    };
+    const formValues = getSignInFormValues(formData);
 
     await signInSchema.validate(formValues);
 
+    await signIn(formValues);
+
     toast("Sign In successfully", { type: "success" });
 
-    return null;
-    // return redirect("/login");
+    return redirect("/profile");
   } catch (e) {
     if (e instanceof ValidationError) {
       return { error: e.message };
@@ -47,11 +53,7 @@ const SignIn = (): React.ReactElement => {
         <Form action="/sign-in" method="post">
           <SignInForm />
         </Form>
-        <img
-          src="https://making-pictures.com/wp-content/uploads/2021/10/Elliott_Wilcox_Adidas_Speedflow_0001-1.jpg"
-          alt="ortuseight"
-          className="h-1/3 w-1/3"
-        />
+        <img src={signInImage} alt="ortuseight" className="h-1/3 w-1/3" />
       </div>
     </div>
   );
