@@ -38,6 +38,9 @@ const getFontStyle = (variant?: string) => {
     case VARIANT.PRODUCT_PRICE: {
       return "font-normal text-sm text-black";
     }
+    case VARIANT.PRODUCT_PRICE_SECONDARY: {
+      return "font-semibold text-sm text-primary";
+    }
     case VARIANT.BREADCRUMB: {
       return "font-semibold text-sm text-grayPrimary";
     }
@@ -61,6 +64,15 @@ const getFontStyle = (variant?: string) => {
     }
     case VARIANT.INPUT_LABEL_ERROR: {
       return "font-semibold text-sm text-red-500";
+    }
+    case VARIANT.CART_ITEM_TITLE: {
+      return "font-medium text-lg text-black";
+    }
+    case VARIANT.ORDER_PRICE_ITEM: {
+      return "font-medium text-sm text-primary";
+    }
+    case VARIANT.ORDER_PRICE_TOTAL: {
+      return "font-medium text-md text-primary";
     }
     default: {
       return "font-normal text-base text-black";
