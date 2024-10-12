@@ -21,6 +21,7 @@ type Props = {
   onPressLogo: () => void;
   onPressProfile: () => void;
   name: string;
+  totalItem?: number;
 };
 
 const NavBar = (props: Props): React.ReactElement => {
@@ -33,6 +34,7 @@ const NavBar = (props: Props): React.ReactElement => {
     onPressLogo,
     onPressProfile,
     name,
+    totalItem,
   } = props;
 
   const [menuActive, setMenuActive] = useState("");
@@ -98,12 +100,19 @@ const NavBar = (props: Props): React.ReactElement => {
         </div>
       </div>
       <div className="flex flex-row items-center">
-        <img
-          src={Cart}
-          alt="Cart"
-          className={`w-5 h-5 mr-10 ${getHoverStyle(true)}`}
-          onClick={() => handleOnPressCart()}
-        />
+        <div className="relative h-10 flex items-center w-8 mr-5">
+          {totalItem && totalItem > 0 ? (
+            <div className="absolute flex top-0 right-0 w-5 justify-center items-center rounded-full bg-yellowPrimary">
+              <GeneralText text={`${totalItem}`} variant={VARIANT.CART_COUNT} />
+            </div>
+          ) : undefined}
+          <img
+            src={Cart}
+            alt="Cart"
+            className={`w-5 h-5 ${getHoverStyle(true)}`}
+            onClick={() => handleOnPressCart()}
+          />
+        </div>
         {name ? (
           <div className="flex flex-row gap-3">
             <img

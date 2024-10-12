@@ -8,37 +8,42 @@ import { getProfile } from "../../services/Profile.services";
 import type { Brand } from "../../types/Brand.type";
 
 import "./Root.css";
+import { getCarts } from "../../services/Cart.services";
+
+type RootData = {
+  brands: Brand[];
+  profileName: string;
+  totalItem?: number;
+};
 
 const authCookie = new Cookies(null, { path: "/" });
 
-export const rootLoader = async (): Promise<{
-  brands: Brand[];
-  profileName: string;
-}> => {
+export const rootLoader = async (): Promise<RootData> => {
   try {
     let profileRes;
+    let cartRes;
     const brandsRes = await getBrands();
 
     const token: string = authCookie.get("token");
 
     if (token) {
       profileRes = await getProfile(token);
+      cartRes = await getCarts(token);
+      console.log("cartRes.data.items.length", cartRes.data.items.length);
     }
 
     return {
       brands: brandsRes.data,
       profileName: profileRes ? profileRes.data.fullName : "",
+      totalItem: cartRes ? cartRes.data.items.length : null,
     };
   } catch {
-    return { brands: [], profileName: "" };
+    return { brands: [], profileName: "", totalItem: 0 };
   }
 };
 
 function Root() {
-  const { brands, profileName } = useLoaderData() as {
-    brands: Brand[];
-    profileName: string;
-  };
+  const { brands, profileName, totalItem } = useLoaderData() as RootData;
   const navigate = useNavigate();
 
   const handleOnPressMenu = (brand: string) => {
@@ -76,6 +81,7 @@ function Root() {
         onPressLogo={() => handleOnPressMenu("home")}
         onPressProfile={() => handleOnPressProfile()}
         name={profileName}
+        totalItem={totalItem}
       />
       <div className="flex-grow">
         <Outlet />

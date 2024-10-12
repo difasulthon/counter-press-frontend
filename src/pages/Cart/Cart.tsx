@@ -1,6 +1,12 @@
 import React from "react";
 import { Cookies } from "react-cookie";
-import { redirect, useLoaderData } from "react-router-dom";
+import {
+  NavigateFunction,
+  redirect,
+  useLoaderData,
+  useNavigate,
+} from "react-router-dom";
+import { toast } from "react-toastify";
 
 import PageTitle from "../../components/PageTitle";
 import CartItem from "../../components/CartItem";
@@ -10,7 +16,12 @@ import GeneralText from "../../components/GeneralText";
 import { GeneralTextConstants } from "../../constants";
 import type { Cart } from "../../types/Cart.type";
 
-import { mapOrderSummary } from "./Cart.handler";
+import {
+  handleAddItem,
+  handleDeleteItem,
+  handleMinItem,
+  mapOrderSummary,
+} from "./Cart.handler";
 
 const authCookie = new Cookies(null, { path: "/" });
 
@@ -34,9 +45,45 @@ export const cartLoader = async () => {
   }
 };
 
+const onAddItem =
+  (itemId: string, existingQuantity: number, navigate: NavigateFunction) =>
+  async () => {
+    try {
+      await handleAddItem(itemId, existingQuantity);
+
+      navigate("/cart");
+    } catch {
+      toast("Failed add item", { type: "error" });
+    }
+  };
+
+const onMinItem =
+  (itemId: string, existingQuantity: number, navigate: NavigateFunction) =>
+  async () => {
+    try {
+      await handleMinItem(itemId, existingQuantity);
+
+      navigate("/cart");
+    } catch {
+      toast("Failed minus item", { type: "error" });
+    }
+  };
+
+const onDeleteItem =
+  (itemId: string, navigate: NavigateFunction) => async () => {
+    try {
+      await handleDeleteItem(itemId);
+
+      navigate("/cart");
+    } catch {
+      toast("Failed delete item", { type: "error" });
+    }
+  };
+
 const Cart = (): React.ReactElement => {
   const { carts } = useLoaderData() as { carts: Cart[] };
   const { topSection, subTotal, bottomSection } = mapOrderSummary(carts);
+  const navigate = useNavigate();
 
   return (
     <div className="pl-20 pr-20">
@@ -49,6 +96,9 @@ const Cart = (): React.ReactElement => {
                 key={item.id}
                 product={item.product}
                 quantity={item.quantity}
+                onAddClick={onAddItem(item.id, item.quantity, navigate)}
+                onMinClick={onMinItem(item.id, item.quantity, navigate)}
+                onDeleteClick={onDeleteItem(item.id, navigate)}
               />
             ))}
           </div>

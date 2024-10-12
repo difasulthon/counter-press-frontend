@@ -74,6 +74,9 @@ const getFontStyle = (variant?: string) => {
     case VARIANT.ORDER_PRICE_TOTAL: {
       return "font-medium text-md text-primary";
     }
+    case VARIANT.CART_COUNT: {
+      return "font-normal text-sm text-white";
+    }
     default: {
       return "font-normal text-base text-black";
     }
@@ -88,7 +91,7 @@ const GeneralText = (props: Props): React.ReactElement => {
       onClick={onPress}
       className={`whitespace-pre-line ${getFontStyle(variant)} ${getHoverStyle(
         !!onPress
-      )} ${italic ? "italic" : undefined} text-red`}
+      )} ${italic ? "italic" : undefined}`}
     >
       {text}
     </p>

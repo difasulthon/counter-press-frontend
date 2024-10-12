@@ -4,20 +4,21 @@ import {
   NavigateFunction,
   useLoaderData,
   useNavigate,
+  useRevalidator,
 } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import ChevronRight from "../../assets/icons/chevron-right-grey.svg";
+import Button from "../../components/Button";
 import GeneralText from "../../components/GeneralText";
+import CategoryHeader from "../../components/CategoryHeader";
+import SizeItem from "../../components/SizeItem";
 import { BASE_URL } from "../../configuration/env";
 import { GeneralTextConstants } from "../../constants";
 import { getCapitalizeEachWord, getCurrency } from "../../utils/Formatter.util";
-import SizeItem from "../../components/SizeItem";
 import type { Product } from "../../types/Product.type";
 
 import config from "./Product.config";
-import Button from "../../components/Button";
-import CategoryHeader from "../../components/CategoryHeader";
 import { handleAddToCart } from "./Product.handler";
 
 const { VARIANT } = GeneralTextConstants;
@@ -40,11 +41,14 @@ export const productLoader = async ({
 };
 
 const onAddToCart =
-  (productId: string, navigate: NavigateFunction) => async () => {
+  (productId: string, navigate: NavigateFunction, revalidate: () => void) =>
+  async () => {
     try {
       await handleAddToCart(productId);
 
       navigate("/cart");
+
+      revalidate();
     } catch {
       toast("Failed add to cart", { type: "error" });
     }
@@ -53,7 +57,9 @@ const onAddToCart =
 const Product = (): React.ReactElement => {
   const { product } = useLoaderData() as { product: Product };
   const { name, brandName, image, slug, price, id } = product;
+
   const navigate = useNavigate();
+  const { revalidate } = useRevalidator();
 
   return (
     <div className="pt-6 pl-20 pr-20">
@@ -90,7 +96,7 @@ const Product = (): React.ReactElement => {
             <Button
               text="Add to Cart"
               border
-              onPress={onAddToCart(id, navigate)}
+              onPress={onAddToCart(id, navigate, revalidate)}
             />
             <Button text="Buy Now" onPress={() => {}} />
           </div>
