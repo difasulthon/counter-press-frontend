@@ -10,6 +10,7 @@ type Props = ButtonProps & {
   onPress?: () => void;
   size?: string;
   fullWidth?: boolean;
+  color?: string;
 };
 
 const getTextSize = (size: string) => {
@@ -47,7 +48,7 @@ const getHeightSize = (size: string) => {
 };
 
 const Button = (props: Props): React.ReactElement => {
-  const { text, border = false, onPress, size = "", fullWidth } = props;
+  const { text, border = false, onPress, size = "", fullWidth, color } = props;
 
   const textSize = getTextSize(size);
   const heightSize = getHeightSize(size);
@@ -70,7 +71,9 @@ const Button = (props: Props): React.ReactElement => {
   return (
     <button
       onClick={onPress}
-      className={`items-center justify-center bg-primary rounded-full pl-4 pr-4 ${heightSize} ${getHoverStyle(
+      className={`items-center justify-center ${
+        color ? color : "bg-primary"
+      } rounded-full pl-4 pr-4 ${heightSize} ${getHoverStyle(
         true
       )} ${widthClass}`}
       type={props.type}

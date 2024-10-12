@@ -1,10 +1,12 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 import { GeneralTextConstants } from "../../constants";
 
 import GeneralText from "../GeneralText";
 import { PriceItem } from "../../types/Order.type";
 import { getCurrency } from "../../utils/Formatter.util";
+import { getHoverStyle } from "../../utils/Style.util";
 
 type Props = {
   topSection: PriceItem[];
@@ -41,7 +43,14 @@ const OrderSummary = (props: Props): React.ReactElement => {
           variant={VARIANT.ORDER_PRICE_TOTAL}
         />
       </div>
-      <button className="bg-primary rounded-md h-10 text-white font-medium mt-6">
+      <button
+        className={`bg-primary rounded-md h-10 text-white font-medium mt-6 ${getHoverStyle(
+          true
+        )}`}
+        onClick={() => {
+          toast("Sorry, this feature is not available now", { type: "error" });
+        }}
+      >
         Check Out
       </button>
     </div>

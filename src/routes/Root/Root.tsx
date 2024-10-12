@@ -22,20 +22,20 @@ export const rootLoader = async (): Promise<RootData> => {
   try {
     let profileRes;
     let cartRes;
-    const brandsRes = await getBrands();
 
     const token: string = authCookie.get("token");
 
     if (token) {
       profileRes = await getProfile(token);
       cartRes = await getCarts(token);
-      console.log("cartRes.data.items.length", cartRes.data.items.length);
     }
+
+    const brandsRes = await getBrands();
 
     return {
       brands: brandsRes.data,
       profileName: profileRes ? profileRes.data.fullName : "",
-      totalItem: cartRes ? cartRes.data.items.length : null,
+      totalItem: cartRes ? cartRes.data.items.length : 0,
     };
   } catch {
     return { brands: [], profileName: "", totalItem: 0 };

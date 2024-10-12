@@ -1,6 +1,7 @@
 import React from "react";
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, redirect, useLoaderData } from "react-router-dom";
 import { Cookies } from "react-cookie";
+import { toast } from "react-toastify";
 
 import PageTitle from "../../components/PageTitle";
 import { getProfile } from "../../services/Profile.services";
@@ -20,6 +21,16 @@ export const profileLoader = async (): Promise<{ profile: Profile | null }> => {
     };
   } catch {
     return { profile: null };
+  }
+};
+
+export const profileAction = async () => {
+  try {
+    authCookie.set("token", "");
+
+    return redirect("/sign-in");
+  } catch {
+    toast("Log Out failed", { type: "error" });
   }
 };
 

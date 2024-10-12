@@ -100,7 +100,14 @@ const Product = (): React.ReactElement => {
               border
               onPress={onAddToCart(id, navigate, revalidate)}
             />
-            <Button text="Buy Now" onPress={() => {}} />
+            <Button
+              text="Buy Now"
+              onPress={() =>
+                toast("Sorry, this feature is not available now", {
+                  type: "error",
+                })
+              }
+            />
           </div>
         </div>
         <div className="w-2/6 pt-6 pb-6">

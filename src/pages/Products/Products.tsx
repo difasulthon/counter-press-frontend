@@ -87,7 +87,7 @@ const Products = (): React.ReactElement => {
             ))}
         </div>
       ) : (
-        <div className="flex w-full justify-center mt-36">
+        <div className="flex w-full justify-center items-center h-96">
           <GeneralText
             text={`There are no "${query}" products available`}
             variant={GeneralTextConstants.VARIANT.CATEGORY_HEADER}

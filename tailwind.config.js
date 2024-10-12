@@ -11,7 +11,8 @@ export default {
         secondary: '#18378F',
         grayPrimary: '#858585',
         graySecondary: '#F4F4F4',
-        yellowPrimary: '#FFB800'
+        yellowPrimary: '#FFB800',
+        redPrimary: '#EA1C0F'
       },
       fontFamily: {
         logoText: ["Pacifico"]

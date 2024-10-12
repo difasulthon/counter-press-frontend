@@ -1,6 +1,8 @@
+import { toast } from "react-toastify";
+
 import { getCurrency } from "../../utils/Formatter.util";
-import type { Cart } from "../../types/Cart.type";
 import { addOrMinItem, deleteItem } from "../../services/Cart.services";
+import type { Cart } from "../../types/Cart.type";
 
 export const mapOrderSummary = (carts: Cart[]) => {
   const topSection = carts.map((item) => ({
@@ -52,6 +54,8 @@ export const handleMinItem = async (
 
     if (quantity === 0) {
       await deleteItem(itemId);
+
+      toast("Successfully delete product", { type: "error" });
     }
 
     await addOrMinItem(itemId, quantity);

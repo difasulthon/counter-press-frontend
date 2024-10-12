@@ -1,6 +1,7 @@
 import React from "react";
 
 import InputWithLabel from "../../../components/InputWithLabel";
+import Button from "../../../components/Button";
 import type { Profile } from "../../../types/Profile.type";
 
 type Props = {
@@ -62,6 +63,9 @@ const ProfileForm = (props: Props): React.ReactElement => {
         disabled
         value={profile.phoneNumber}
       />
+      <div className="mt-10">
+        <Button text="Log Out" type="submit" fullWidth color="bg-redPrimary" />
+      </div>
     </>
   );
 };
