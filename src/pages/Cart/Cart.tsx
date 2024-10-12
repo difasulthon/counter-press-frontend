@@ -74,6 +74,7 @@ const onDeleteItem =
     try {
       await handleDeleteItem(itemId);
 
+      toast("Successfully delete item", { type: "success" });
       navigate("/cart");
     } catch {
       toast("Failed delete item", { type: "error" });

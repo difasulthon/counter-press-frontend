@@ -49,6 +49,8 @@ const onAddToCart =
       navigate("/cart");
 
       revalidate();
+
+      toast("Successfully added product", { type: "success" });
     } catch {
       toast("Failed add to cart", { type: "error" });
     }
