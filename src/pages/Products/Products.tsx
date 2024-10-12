@@ -13,6 +13,7 @@ import { Brand } from "../../types/Brand.type";
 import ProductItem from "../../components/ProductItem";
 import GeneralText from "../../components/GeneralText";
 import { GeneralTextConstants } from "../../constants";
+import { getCapitalizeEachWord } from "../../utils/Formatter.util";
 
 type ProductsPayload = {
   products: Product[];
@@ -38,6 +39,9 @@ export const productsLoader = async ({
       item.name.toLowerCase()
     );
     const brandValue = brands.includes(brandName) ? brandName : "";
+    document.title = brandValue
+      ? getCapitalizeEachWord(brandValue)
+      : "Products";
 
     const getProductsUrl = q
       ? `${BASE_URL}/products?name=${q}&brandName=${brandValue}&page=1&size=10`

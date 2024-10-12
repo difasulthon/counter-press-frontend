@@ -11,6 +11,7 @@ import { getProductsHome } from "../../services/Product.services";
 
 export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
   try {
+    document.title = "Home";
     const data = await getProductsHome();
 
     return {

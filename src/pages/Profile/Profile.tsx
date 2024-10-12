@@ -13,6 +13,7 @@ const authCookie = new Cookies(null, { path: "/" });
 
 export const profileLoader = async (): Promise<{ profile: Profile | null }> => {
   try {
+    document.title = "Profile";
     const token: string = authCookie.get("token");
     const data = await getProfile(token);
 
@@ -27,6 +28,8 @@ export const profileLoader = async (): Promise<{ profile: Profile | null }> => {
 export const profileAction = async () => {
   try {
     authCookie.set("token", "");
+
+    toast("Successfully Log Out", { type: "success" });
 
     return redirect("/sign-in");
   } catch {

@@ -31,6 +31,7 @@ export const productLoader = async ({
 
     const res = await fetch(`${BASE_URL}/product/${slug}`);
     const data = await res.json();
+    document.title = getCapitalizeEachWord(data.data.name);
 
     return {
       product: data.data,

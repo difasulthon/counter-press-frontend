@@ -27,6 +27,7 @@ const authCookie = new Cookies(null, { path: "/" });
 
 export const cartLoader = async () => {
   try {
+    document.title = "Cart";
     const token: string = authCookie.get("token");
 
     if (!token) {
