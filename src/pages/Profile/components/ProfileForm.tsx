@@ -1,22 +1,31 @@
 import React from "react";
 
 import InputWithLabel from "../../../components/InputWithLabel";
+import type { Profile } from "../../../types/Profile.type";
 
-const ProfileForm = (): React.ReactElement => {
+type Props = {
+  profile: Profile;
+};
+
+const ProfileForm = (props: Props): React.ReactElement => {
+  const { profile } = props;
+
   return (
     <>
       <div className="flex flex-row gap-7 mb-4">
         <InputWithLabel
           name="fullName"
           label="Full Name"
-          placeholder="Difa Sulthon"
+          placeholder=""
           disabled
+          value={profile.fullName}
         />
         <InputWithLabel
           name="userName"
           label="User Name"
-          placeholder="difasulthon"
+          placeholder=""
           disabled
+          value={profile.userName}
         />
       </div>
       <div className="flex flex-row gap-7 mb-4">
@@ -24,8 +33,9 @@ const ProfileForm = (): React.ReactElement => {
           name="email"
           type="email"
           label="Email"
-          placeholder="difa@email.com"
+          placeholder=""
           disabled
+          value={profile.email}
         />
       </div>
       <div className="border border-graySecondary mt-6 mb-6"></div>
@@ -33,21 +43,24 @@ const ProfileForm = (): React.ReactElement => {
         <InputWithLabel
           name="address"
           label="Address"
-          placeholder="Soekarno-Hatta road"
+          placeholder=""
           disabled
+          value={profile.address}
         />
         <InputWithLabel
           name="city"
           label="City"
-          placeholder="Jakarta"
+          placeholder=""
           disabled
+          value={profile.city}
         />
       </div>
       <InputWithLabel
         name="phoneNumber"
         label="Phone Number"
-        placeholder="081212121212"
+        placeholder=""
         disabled
+        value={profile.phoneNumber}
       />
     </>
   );

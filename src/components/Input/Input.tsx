@@ -74,6 +74,7 @@ const Input = (props: Props): React.JSX.Element => {
         name={name}
         defaultValue={defaultValue}
         disabled={disabled}
+        value={value}
       />
       <div className="absolute right-6 top-2" onClick={onClickRightIcon}>
         {rightIcon}

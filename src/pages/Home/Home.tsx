@@ -4,17 +4,14 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import InputSearch from "../../components/InputSearch";
 import CategoryHeader from "../../components/CategoryHeader";
 import ProductItem from "../../components/ProductItem";
-import { BASE_URL } from "../../configuration/env";
 import type { Product } from "../../types/Product.type";
 
 import Jumbotron from "./components/Jumbotron";
+import { getProductsHome } from "../../services/Product.services";
 
 export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
   try {
-    const res = await fetch(
-      `${BASE_URL}/products?sort=desc&sortBy=createdAt&page=1&size=4`
-    );
-    const data = await res.json();
+    const data = await getProductsHome();
 
     return {
       products: data.data.products,

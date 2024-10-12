@@ -10,6 +10,7 @@ import Profile from "../pages/Profile";
 import { homeLoader } from "../pages/Home/Home";
 import { productLoader } from "../pages/Product/Product";
 import { productsLoader } from "../pages/Products/Products";
+import { profileLoader } from "../pages/Profile/Profile";
 import { signInAction } from "../pages/SignIn/SignIn";
 import { signUpAction } from "../pages/SignUp/SignUp";
 
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
       {
         element: <Profile />,
         path: "/profile",
+        loader: profileLoader,
       },
     ],
   },
