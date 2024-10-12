@@ -1,5 +1,11 @@
 import React from "react";
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import {
+  LoaderFunctionArgs,
+  NavigateFunction,
+  useLoaderData,
+  useNavigate,
+} from "react-router-dom";
+import { toast } from "react-toastify";
 
 import ChevronRight from "../../assets/icons/chevron-right-grey.svg";
 import GeneralText from "../../components/GeneralText";
@@ -12,6 +18,7 @@ import type { Product } from "../../types/Product.type";
 import config from "./Product.config";
 import Button from "../../components/Button";
 import CategoryHeader from "../../components/CategoryHeader";
+import { handleAddToCart } from "./Product.handler";
 
 const { VARIANT } = GeneralTextConstants;
 
@@ -27,15 +34,26 @@ export const productLoader = async ({
     return {
       product: data.data,
     };
-  } catch (e) {
-    console.log("e", e);
+  } catch {
     return { product: null };
   }
 };
 
+const onAddToCart =
+  (productId: string, navigate: NavigateFunction) => async () => {
+    try {
+      await handleAddToCart(productId);
+
+      navigate("/cart");
+    } catch {
+      toast("Failed add to cart", { type: "error" });
+    }
+  };
+
 const Product = (): React.ReactElement => {
   const { product } = useLoaderData() as { product: Product };
-  const { name, brandName, image, slug, price } = product;
+  const { name, brandName, image, slug, price, id } = product;
+  const navigate = useNavigate();
 
   return (
     <div className="pt-6 pl-20 pr-20">
@@ -64,12 +82,16 @@ const Product = (): React.ReactElement => {
             <GeneralText text="Select a size" />
             <div className="flex flex-row gap-2 mt-3">
               {config.sizeList.map((item) => (
-                <SizeItem text={item.label} />
+                <SizeItem key={item.value} text={item.label} />
               ))}
             </div>
           </div>
           <div className="flex flex-row gap-3">
-            <Button text="Add to Cart" border onPress={() => {}} />
+            <Button
+              text="Add to Cart"
+              border
+              onPress={onAddToCart(id, navigate)}
+            />
             <Button text="Buy Now" onPress={() => {}} />
           </div>
         </div>

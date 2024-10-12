@@ -1,4 +1,5 @@
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
+import { Cookies } from "react-cookie";
 
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer";
@@ -8,17 +9,25 @@ import type { Brand } from "../../types/Brand.type";
 
 import "./Root.css";
 
+const authCookie = new Cookies(null, { path: "/" });
+
 export const rootLoader = async (): Promise<{
   brands: Brand[];
   profileName: string;
 }> => {
   try {
+    let profileRes;
     const brandsRes = await getBrands();
-    const profileRes = await getProfile();
+
+    const token: string = authCookie.get("token");
+
+    if (token) {
+      profileRes = await getProfile(token);
+    }
 
     return {
       brands: brandsRes.data,
-      profileName: profileRes.data.fullName,
+      profileName: profileRes ? profileRes.data.fullName : "",
     };
   } catch {
     return { brands: [], profileName: "" };

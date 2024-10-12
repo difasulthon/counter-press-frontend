@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, useLoaderData } from "react-router-dom";
+import { Cookies } from "react-cookie";
 
 import PageTitle from "../../components/PageTitle";
 import { getProfile } from "../../services/Profile.services";
@@ -7,9 +8,12 @@ import type { Profile } from "../../types/Profile.type";
 
 import ProfileForm from "./components/ProfileForm";
 
+const authCookie = new Cookies(null, { path: "/" });
+
 export const profileLoader = async (): Promise<{ profile: Profile | null }> => {
   try {
-    const data = await getProfile();
+    const token: string = authCookie.get("token");
+    const data = await getProfile(token);
 
     return {
       profile: data.data,

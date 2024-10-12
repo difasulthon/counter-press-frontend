@@ -1,12 +1,6 @@
-import { Cookies } from "react-cookie";
-
 import { BASE_URL } from "../configuration/env";
 
-const authCookie = new Cookies(null, { path: "/" });
-
-export const getProfile = async () => {
-  const token: string = authCookie.get("token");
-
+export const getProfile = async (token: string) => {
   const res = await fetch(`${BASE_URL}/auth/me`, {
     method: "GET",
     headers: {

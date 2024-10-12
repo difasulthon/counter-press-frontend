@@ -11,6 +11,7 @@ import { homeLoader } from "../pages/Home/Home";
 import { productLoader } from "../pages/Product/Product";
 import { productsLoader } from "../pages/Products/Products";
 import { profileLoader } from "../pages/Profile/Profile";
+import { cartLoader } from "../pages/Cart/Cart";
 import { signInAction } from "../pages/SignIn/SignIn";
 import { signUpAction } from "../pages/SignUp/SignUp";
 
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
       {
         element: <Cart />,
         path: "/cart",
+        loader: cartLoader,
       },
       {
         element: <SignIn />,

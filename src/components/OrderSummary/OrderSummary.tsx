@@ -25,7 +25,7 @@ const OrderSummary = (props: Props): React.ReactElement => {
   const { topSection, bottomSection, total } = props;
 
   return (
-    <div className="flex flex-col px-10 py-10 border-2 border-graySecondary rounded-md">
+    <div className="flex flex-col px-10 py-10 border-2 border-graySecondary rounded-md mb-10">
       <GeneralText text="Order Summary" variant={VARIANT.CART_ITEM_TITLE} />
       <div className="mt-4">
         {topSection.map((item, index) => priceItem(item, index))}
