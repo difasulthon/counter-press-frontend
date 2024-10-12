@@ -21,7 +21,6 @@ export const profileLoader = async (): Promise<{ profile: Profile | null }> => {
 
 const Profile = (): React.ReactElement => {
   const { profile } = useLoaderData() as { profile: Profile };
-  console.log("profile", profile);
 
   return (
     <div className="pl-20 pr-20 pb-10">

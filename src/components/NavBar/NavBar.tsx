@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-import { GeneralTextConstants } from "../../constants";
 import Cart from "../../assets/icons/cart.svg";
+import User from "../../assets/icons/user.svg";
+import { GeneralTextConstants } from "../../constants";
 import { getHoverStyle } from "../../utils/Style.util";
 import type { Brand } from "../../types/Brand.type";
 
@@ -18,6 +19,8 @@ type Props = {
   onPressSignIn: () => void;
   onPressSignUp: () => void;
   onPressLogo: () => void;
+  onPressProfile: () => void;
+  name: string;
 };
 
 const NavBar = (props: Props): React.ReactElement => {
@@ -28,6 +31,8 @@ const NavBar = (props: Props): React.ReactElement => {
     onPressSignIn,
     onPressSignUp,
     onPressLogo,
+    onPressProfile,
+    name,
   } = props;
 
   const [menuActive, setMenuActive] = useState("");
@@ -54,6 +59,11 @@ const NavBar = (props: Props): React.ReactElement => {
 
   const handleOnPressLogo = () => {
     onPressLogo();
+    setMenuActive("");
+  };
+
+  const handleOnPressProfile = () => {
+    onPressProfile();
     setMenuActive("");
   };
 
@@ -94,10 +104,26 @@ const NavBar = (props: Props): React.ReactElement => {
           className={`w-5 h-5 mr-10 ${getHoverStyle(true)}`}
           onClick={() => handleOnPressCart()}
         />
-        <div className="flex flex-row gap-3">
-          <Button text="Sign Up" onPress={() => handleOnPressSignUp()} />
-          <Button text="Sign In" border onPress={() => handleOnPressSignIn()} />
-        </div>
+        {name ? (
+          <div className="flex flex-row gap-3">
+            <img
+              src={User}
+              alt="User"
+              className={`w-6 h-6 ${getHoverStyle(true)}`}
+              onClick={() => handleOnPressProfile()}
+            />
+            <GeneralText text={`Hello, ${name}`} />
+          </div>
+        ) : (
+          <div className="flex flex-row gap-3">
+            <Button text="Sign Up" onPress={() => handleOnPressSignUp()} />
+            <Button
+              text="Sign In"
+              border
+              onPress={() => handleOnPressSignIn()}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
