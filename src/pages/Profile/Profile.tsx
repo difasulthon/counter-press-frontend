@@ -1,20 +1,18 @@
 import React from "react";
 import { Form, redirect, useLoaderData } from "react-router-dom";
-import { Cookies } from "react-cookie";
 import { toast } from "react-toastify";
 
 import PageTitle from "../../components/PageTitle";
+import { cookie } from "../../configuration/Cookies";
 import { getProfile } from "../../services/Profile.services";
 import type { Profile } from "../../types/Profile.type";
 
 import ProfileForm from "./components/ProfileForm";
 
-const authCookie = new Cookies(null, { path: "/" });
-
 export const profileLoader = async (): Promise<{ profile: Profile | null }> => {
   try {
     document.title = "Profile";
-    const token: string = authCookie.get("token");
+    const token: string = cookie.get("token");
     const data = await getProfile(token);
 
     return {
@@ -27,7 +25,7 @@ export const profileLoader = async (): Promise<{ profile: Profile | null }> => {
 
 export const profileAction = async () => {
   try {
-    authCookie.set("token", "");
+    cookie.set("token", "");
 
     toast("Successfully Log Out", { type: "success" });
 

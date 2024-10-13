@@ -4,27 +4,35 @@ import { getCurrency } from "../../utils/Formatter.util";
 import { addOrMinItem, deleteItem } from "../../services/Cart.services";
 import type { Cart } from "../../types/Cart.type";
 
-export const mapOrderSummary = (carts: Cart[]) => {
-  const topSection = carts.map((item) => ({
+const getTopSection = (carts: Cart[]) =>
+  carts.map((item) => ({
     label: item.product.name,
     value: getCurrency(item.quantity * item.product.price),
   }));
-  const subTotal = carts
+
+const getSubTotal = (carts: Cart[]) =>
+  carts
     .map((item) => ({
       label: item.product.name,
       value: item.quantity * item.product.price,
     }))
     .reduce((total, item) => total + item.value, 0);
-  const bottomSection = [
-    {
-      label: "Sub Total",
-      value: getCurrency(subTotal),
-    },
-    {
-      label: "Shipping",
-      value: "-",
-    },
-  ];
+
+const getBottomSection = (subTotal: number) => [
+  {
+    label: "Sub Total",
+    value: getCurrency(subTotal),
+  },
+  {
+    label: "Shipping",
+    value: "-",
+  },
+];
+
+export const mapOrderSummary = (carts: Cart[]) => {
+  const topSection = getTopSection(carts);
+  const subTotal = getSubTotal(carts);
+  const bottomSection = getBottomSection(subTotal);
 
   return {
     topSection,

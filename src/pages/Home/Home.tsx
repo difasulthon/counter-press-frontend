@@ -4,10 +4,10 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import InputSearch from "../../components/InputSearch";
 import CategoryHeader from "../../components/CategoryHeader";
 import ProductItem from "../../components/ProductItem";
+import { getProductsHome } from "../../services/Product.services";
 import type { Product } from "../../types/Product.type";
 
 import Jumbotron from "./components/Jumbotron";
-import { getProductsHome } from "../../services/Product.services";
 
 export const homeLoader = async (): Promise<{ products: Product[] | null }> => {
   try {

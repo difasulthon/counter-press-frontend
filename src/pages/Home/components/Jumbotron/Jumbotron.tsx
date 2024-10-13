@@ -5,8 +5,8 @@ import BackgroundJumbotron from "../../../../assets/images/bg-jumbotron.png";
 import NikeTiempoLegend from "../../../../assets/images/nike-tiempo-legend-10.png";
 import LogoText from "../../../../components/LogoText";
 import GeneralText from "../../../../components/GeneralText";
-import { GeneralTextConstants } from "../../../../constants";
 import Button from "../../../../components/Button";
+import { GeneralTextConstants } from "../../../../constants";
 
 const {
   VARIANT: { JUMBOTRON, JUMBOTRON_BOLD },

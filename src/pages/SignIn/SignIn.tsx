@@ -42,6 +42,7 @@ const SignIn = (): React.ReactElement => {
 
   useEffect(() => {
     document.title = "Sign In";
+
     if (actionData && actionData.error) {
       toast(actionData.error, { type: "error" });
     }

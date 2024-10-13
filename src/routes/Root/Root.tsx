@@ -1,14 +1,14 @@
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
-import { Cookies } from "react-cookie";
 
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer";
+import { cookie } from "../../configuration/Cookies";
 import { getBrands } from "../../services/Product.services";
 import { getProfile } from "../../services/Profile.services";
+import { getCarts } from "../../services/Cart.services";
 import type { Brand } from "../../types/Brand.type";
 
 import "./Root.css";
-import { getCarts } from "../../services/Cart.services";
 
 type RootData = {
   brands: Brand[];
@@ -16,14 +16,12 @@ type RootData = {
   totalItem?: number;
 };
 
-const authCookie = new Cookies(null, { path: "/" });
-
 export const rootLoader = async (): Promise<RootData> => {
   try {
     let profileRes;
     let cartRes;
 
-    const token: string = authCookie.get("token");
+    const token: string = cookie.get("token");
 
     if (token) {
       profileRes = await getProfile(token);

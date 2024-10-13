@@ -13,7 +13,7 @@ import Button from "../../components/Button";
 import GeneralText from "../../components/GeneralText";
 import CategoryHeader from "../../components/CategoryHeader";
 import SizeItem from "../../components/SizeItem";
-import { BASE_URL } from "../../configuration/env";
+import { BASE_URL } from "../../configuration/Env";
 import { GeneralTextConstants } from "../../constants";
 import { getCapitalizeEachWord, getCurrency } from "../../utils/Formatter.util";
 import type { Product } from "../../types/Product.type";

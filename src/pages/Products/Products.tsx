@@ -7,13 +7,13 @@ import {
 } from "react-router-dom";
 
 import InputSearch from "../../components/InputSearch";
-import { BASE_URL } from "../../configuration/env";
 import type { Product } from "../../types/Product.type";
-import { Brand } from "../../types/Brand.type";
 import ProductItem from "../../components/ProductItem";
 import GeneralText from "../../components/GeneralText";
 import { GeneralTextConstants } from "../../constants";
-import { getCapitalizeEachWord } from "../../utils/Formatter.util";
+import { getBrands, getProducts } from "../../services/Product.services";
+import { getQuery } from "../../utils/QueryParam.utils";
+import { getDocumentTitle, getListBrand } from "./Product.handler";
 
 type ProductsPayload = {
   products: Product[];
@@ -29,33 +29,23 @@ export const productsLoader = async ({
 }: LoaderFunctionArgs): Promise<ProductsPayload> => {
   try {
     const { brandName } = params;
-    const url = new URL(request.url);
-    const q = url.searchParams.get("q");
+    const q = getQuery(request);
 
-    const brandsRes = await fetch(`${BASE_URL}/brands`);
-    const brandsData = await brandsRes.json();
+    const brandsData = await getBrands();
 
-    const brands = brandsData.data.map((item: Brand) =>
-      item.name.toLowerCase()
-    );
-    const brandValue = brands.includes(brandName) ? brandName : "";
-    document.title = brandValue
-      ? getCapitalizeEachWord(brandValue)
-      : "Products";
+    const brands = getListBrand(brandsData);
 
-    const getProductsUrl = q
-      ? `${BASE_URL}/products?name=${q}&brandName=${brandValue}&page=1&size=10`
-      : `${BASE_URL}/products?brandName=${brandValue}&page=1&size=10`;
+    const brandValue = brandName && brands.includes(brandName) ? brandName : "";
+    document.title = getDocumentTitle(brandValue);
 
-    const res = await fetch(getProductsUrl);
-    const data = await res.json();
+    const productsData = await getProducts(q, brandValue);
 
     return {
       brand: brandValue,
-      products: data.data.products,
-      page: data.page,
-      size: data.size,
-      total: data.total,
+      products: productsData.data.products,
+      page: productsData.page,
+      size: productsData.size,
+      total: productsData.total,
     };
   } catch {
     return {
@@ -72,6 +62,7 @@ const Products = (): React.ReactElement => {
   const { products, brand } = useLoaderData() as ProductsPayload;
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
   const query = searchParams.get("q") || brand;
 
   return (

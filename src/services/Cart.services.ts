@@ -1,7 +1,7 @@
 import { Cookies } from "react-cookie";
 import { redirect } from "react-router-dom";
 
-import { BASE_URL } from "../configuration/env";
+import { BASE_URL } from "../configuration/Env";
 
 const authCookie = new Cookies(null, { path: "/" });
 

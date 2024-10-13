@@ -1,4 +1,4 @@
-import { BASE_URL } from "../configuration/env";
+import { BASE_URL } from "../configuration/Env";
 
 export const getProfile = async (token: string) => {
   const res = await fetch(`${BASE_URL}/auth/me`, {

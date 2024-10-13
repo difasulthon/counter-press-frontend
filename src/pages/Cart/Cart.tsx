@@ -1,5 +1,4 @@
 import React from "react";
-import { Cookies } from "react-cookie";
 import {
   NavigateFunction,
   redirect,
@@ -11,9 +10,10 @@ import { toast } from "react-toastify";
 import PageTitle from "../../components/PageTitle";
 import CartItem from "../../components/CartItem";
 import OrderSummary from "../../components/OrderSummary";
-import { getCarts } from "../../services/Cart.services";
+import { cookie } from "../../configuration/Cookies";
 import GeneralText from "../../components/GeneralText";
 import { GeneralTextConstants } from "../../constants";
+import { getCarts } from "../../services/Cart.services";
 import type { Cart } from "../../types/Cart.type";
 
 import {
@@ -23,12 +23,10 @@ import {
   mapOrderSummary,
 } from "./Cart.handler";
 
-const authCookie = new Cookies(null, { path: "/" });
-
 export const cartLoader = async () => {
   try {
     document.title = "Cart";
-    const token: string = authCookie.get("token");
+    const token: string = cookie.get("token");
 
     if (!token) {
       return redirect("/sign-in");

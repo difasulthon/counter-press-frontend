@@ -1,6 +1,6 @@
 import { Cookies } from "react-cookie";
 
-import { BASE_URL } from "../configuration/env";
+import { BASE_URL } from "../configuration/Env";
 import type { SignInForm, SignUpForm } from "../types/Auth.type";
 
 const authCookie = new Cookies(null, { path: "/" });
