@@ -24,11 +24,13 @@ export const signInAction = async ({ request }: ActionFunctionArgs) => {
     await signInSchema.validate(formValues);
 
     await signIn(formValues);
-
     toast("Sign In successfully", { type: "success" });
 
     return redirect("/profile");
   } catch (e) {
+    toast("Failed to Sign In. Please check username and password", {
+      type: "error",
+    });
     if (e instanceof ValidationError) {
       return { error: e.message };
     }

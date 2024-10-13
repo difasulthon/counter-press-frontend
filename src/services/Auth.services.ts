@@ -21,6 +21,7 @@ export const signIn = async (formValues: SignInForm) => {
 
     cookie.set("token", data.data.token);
   } catch {
+    throw Error("Bad Request");
     // no handle
   }
 };
