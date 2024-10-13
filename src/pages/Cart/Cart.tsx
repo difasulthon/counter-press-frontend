@@ -48,7 +48,14 @@ const onAddItem =
   (itemId: string, existingQuantity: number, navigate: NavigateFunction) =>
   async () => {
     try {
-      await handleAddItem(itemId, existingQuantity);
+      const token = cookie.get("token");
+
+      if (!token) {
+        navigate("/sign-in");
+        return;
+      }
+
+      await handleAddItem(itemId, existingQuantity, token);
 
       navigate("/cart");
     } catch {
@@ -60,7 +67,14 @@ const onMinItem =
   (itemId: string, existingQuantity: number, navigate: NavigateFunction) =>
   async () => {
     try {
-      await handleMinItem(itemId, existingQuantity);
+      const token = cookie.get("token");
+
+      if (!token) {
+        navigate("/sign-in");
+        return;
+      }
+
+      await handleMinItem(itemId, existingQuantity, token);
 
       navigate("/cart");
     } catch {
@@ -71,7 +85,13 @@ const onMinItem =
 const onDeleteItem =
   (itemId: string, navigate: NavigateFunction) => async () => {
     try {
-      await handleDeleteItem(itemId);
+      const token = cookie.get("token");
+
+      if (!token) {
+        navigate("/sign-in");
+      }
+
+      await handleDeleteItem(itemId, token);
 
       toast("Successfully delete item", { type: "success" });
       navigate("/cart");

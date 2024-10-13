@@ -1,17 +1,6 @@
-import { Cookies } from "react-cookie";
-import { redirect } from "react-router-dom";
-
 import { BASE_URL } from "../configuration/Env";
 
-const authCookie = new Cookies(null, { path: "/" });
-
-export const addToCart = async (productId: string) => {
-  const token: string = authCookie.get("token");
-
-  if (!token) {
-    redirect("/sign-in");
-  }
-
+export const addToCart = async (productId: string, token: string) => {
   const request = { productId };
   const body = JSON.stringify(request);
 
@@ -37,13 +26,11 @@ export const getCarts = async (token: string) => {
   return data;
 };
 
-export const addOrMinItem = async (itemId: string, quantity: number) => {
-  const token: string = authCookie.get("token");
-
-  if (!token) {
-    redirect("/sign-in");
-  }
-
+export const addOrMinItem = async (
+  itemId: string,
+  quantity: number,
+  token: string
+) => {
   const request = { quantity };
   const body = JSON.stringify(request);
 
@@ -57,13 +44,7 @@ export const addOrMinItem = async (itemId: string, quantity: number) => {
   });
 };
 
-export const deleteItem = async (itemId: string) => {
-  const token: string = authCookie.get("token");
-
-  if (!token) {
-    redirect("/sign-in");
-  }
-
+export const deleteItem = async (itemId: string, token: string) => {
   await fetch(`${BASE_URL}/cart/items/${itemId}`, {
     method: "DELETE",
     headers: {

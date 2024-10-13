@@ -43,11 +43,12 @@ export const mapOrderSummary = (carts: Cart[]) => {
 
 export const handleAddItem = async (
   itemId: string,
-  existingQuantity: number
+  existingQuantity: number,
+  token: string
 ) => {
   try {
     const quantity = existingQuantity + 1;
-    await addOrMinItem(itemId, quantity);
+    await addOrMinItem(itemId, quantity, token);
   } catch {
     // no handle
   }
@@ -55,26 +56,27 @@ export const handleAddItem = async (
 
 export const handleMinItem = async (
   itemId: string,
-  existingQuantity: number
+  existingQuantity: number,
+  token: string
 ) => {
   try {
     const quantity = existingQuantity > 0 ? existingQuantity - 1 : 0;
 
     if (quantity === 0) {
-      await deleteItem(itemId);
+      await deleteItem(itemId, token);
 
       toast("Successfully delete product", { type: "error" });
     }
 
-    await addOrMinItem(itemId, quantity);
+    await addOrMinItem(itemId, quantity, token);
   } catch {
     // no handle
   }
 };
 
-export const handleDeleteItem = async (itemId: string) => {
+export const handleDeleteItem = async (itemId: string, token: string) => {
   try {
-    await deleteItem(itemId);
+    await deleteItem(itemId, token);
   } catch {
     // no handle
   }
